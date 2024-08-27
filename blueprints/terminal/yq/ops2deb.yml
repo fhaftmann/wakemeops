@@ -52,3 +52,11 @@ description: |-
 fetch: https://github.com/mikefarah/yq/releases/download/v{{version}}/yq_linux_{{goarch}}
 install:
   - yq_linux_{{goarch}}:/usr/bin/yq
+script:
+  - chmod 755 {{src}}/usr/bin/yq
+  - "mkdir -p {{src}}/usr/share/bash-completion/completions"
+  - "{{src}}/usr/bin/yq completion bash > {{src}}/usr/share/bash-completion/completions/yq"
+  - "mkdir -p {{src}}/usr/share/zsh/vendor-completions"
+  - "{{src}}/usr/bin/yq completion zsh > {{src}}/usr/share/zsh/vendor-completions/_yq"
+  - "mkdir -p {{src}}/usr/share/fish/vendor_completions.d"
+  - "{{src}}/usr/bin/yq completion fish > {{src}}/usr/share/fish/vendor_completions.d/yq.fish"
